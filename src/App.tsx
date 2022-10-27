@@ -31,10 +31,17 @@ function App() {
         setTasks(filteredTasks)
     }
 
-    const addTask = () => {
-        let task = { id: v1(), title: "Tilda", isDone: true }
+    const addTask = (title: string) => {
+        let task = { id: v1(), title: title, isDone: true }
         let newTasks = [task, ...tasks]
         setTasks(newTasks)
+    }
+
+    const changeTaskStatus = (id: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id === id)
+        if(task) {
+            task.isDone = isDone
+        }
     }
 
     return (
