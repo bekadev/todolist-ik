@@ -41,6 +41,7 @@ function App() {
         let task = tasks.find(t => t.id === id)
         if(task) {
             task.isDone = isDone
+            setTasks([...tasks])
         }
     }
 
@@ -52,6 +53,7 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
             />
         </div>
     );
