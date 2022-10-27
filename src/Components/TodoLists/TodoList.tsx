@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {filterType} from '../../App';
 
 export type TodoListPropsType = {
     title: string
     tasks: Array<TasksPropsType>
-    removeTask: (id:number) => void
+    removeTask: (id:string) => void
     changeFilter: (value: filterType) => void
+    addTask: () => void
 
 }
 export type TasksPropsType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -24,12 +25,21 @@ export const TodoList: React.FC<TodoListPropsType> = (props) => {
     const onClickHandlerCompleted = () => {
         props.changeFilter('completed')
     }
+    const onClickHandlerAddTask = () => {
+        props.addTask()
+    }
+    let [title, setTitle] = useState('')
+    const onChangeHandler = () => {
+
+    }
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button>+</button>
+                <input
+                    onChange={onChangeHandler}
+                    value={title}/>
+                <button onClick={onClickHandlerAddTask}>+</button>
             </div>
             <ul>
                 {props.tasks.map((element)=>{
