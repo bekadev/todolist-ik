@@ -5,10 +5,11 @@ export type TodoListPropsType = {
     title: string
     tasks: Array<TasksPropsType>
     removeTask: (id:string) => void
-    changeFilter: (value: filterType) => void
+    changeFilter: (value: filterType, todolistID: string) => void
     addTask: (title: string) => void
     changeTaskStatus: (id: string, isDone: boolean) => void
-
+    id: string
+    filter: filterType
 }
 export type TasksPropsType = {
     id: string
