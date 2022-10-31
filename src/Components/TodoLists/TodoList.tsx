@@ -10,6 +10,7 @@ export type TodoListPropsType = {
     changeTaskStatus: (id: string, isDone: boolean, todolistID: string) => void
     id: string
     filter: filterType
+    removeTodoList: (id: string) => void
 }
 export type TasksPropsType = {
     id: string
@@ -43,9 +44,14 @@ export const TodoList: React.FC<TodoListPropsType> = (props) => {
             onClickHandlerAddTask()
         }
     }
+    const onClickHandlerRemoveTodoList = () => {
+        props.removeTodoList(props.id)
+    }
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title}
+                <button onClick={onClickHandlerRemoveTodoList}>x</button>
+            </h3>
             <div>
                 <input
                     onChange={onChangeHandler}
