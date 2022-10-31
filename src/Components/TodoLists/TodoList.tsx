@@ -4,10 +4,10 @@ import {filterType} from '../../App';
 export type TodoListPropsType = {
     title: string
     tasks: Array<TasksPropsType>
-    removeTask: (id:string) => void
+    removeTask: (id:string, todolistID: string) => void
     changeFilter: (value: filterType, todolistID: string) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (id: string, isDone: boolean) => void
+    addTask: (title: string, todolistID: string) => void
+    changeTaskStatus: (id: string, isDone: boolean, todolistID: string) => void
     id: string
     filter: filterType
 }
@@ -19,17 +19,17 @@ export type TasksPropsType = {
 
 export const TodoList: React.FC<TodoListPropsType> = (props) => {
     const onClickHandlerAll = () => {
-        props.changeFilter('all')
+        props.changeFilter('all',props.id)
     }
     const onClickHandlerActive = () => {
-        props.changeFilter('active')
+        props.changeFilter('active',props.id)
     }
     const onClickHandlerCompleted = () => {
-        props.changeFilter('completed')
+        props.changeFilter('completed',props.id)
     }
     const onClickHandlerAddTask = () => {
         if (title.trim() !== '') {
-            props.addTask(title.trim())
+            props.addTask(title.trim(),props.id)
             setTitle('')
         }
     }
@@ -56,11 +56,11 @@ export const TodoList: React.FC<TodoListPropsType> = (props) => {
             <ul>
                 {props.tasks.map((element)=>{
                     const onClickHandler = () => {
-                        props.removeTask(element.id)
+                        props.removeTask(element.id,props.id)
                     }
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         let newIsDoneValue = e.currentTarget.checked
-                        props.changeTaskStatus(element.id, newIsDoneValue)
+                        props.changeTaskStatus(element.id, newIsDoneValue,props.id)
                     }
                     return (
                         <li key={element.id}>
